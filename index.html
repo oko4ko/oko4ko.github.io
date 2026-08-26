@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Задача на SQ-1</title>
+  <style>
+    video::-webkit-media-controls-volume-slider {
+    display:none;
+    }
+
+    video::-webkit-media-controls-mute-button {
+    display:none;
+    }
+  </style>
+
+</head>
+<body>
+  <h2 id="video_title">1</h2>
+  <video id="video" width="640" height="480" controls muted loop autoplay>
+    <source src={{ url_for('static', filename="1.mp4") }} type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <button onclick="changeVideoLeft()">предыдущий</button>
+  <button onclick="changeVideoRight()">следующий</button>
+
+  <script>
+    function changeVideoRight(){
+      if (!sessionStorage.current) {
+        sessionStorage.current = 1;
+        sessionStorage.currentTitle = 1;
+      }
+
+      if (sessionStorage.current == 11) {
+        sessionStorage.current = 1;
+      } else {
+        sessionStorage.current = Number(sessionStorage.current) + 1;
+      }
+
+      if (sessionStorage.current == 9) {
+        sessionStorage.currentTitle = "Перевод 1";
+      } else if (sessionStorage.current == 10){
+        sessionStorage.currentTitle = "Перевод 2";
+      } else if (sessionStorage.current == 11){
+        sessionStorage.currentTitle = "Перевод 3";
+      } else {
+      sessionStorage.currentTitle = sessionStorage.current;
+      }
+
+      document.getElementById("video").src = "static/" + sessionStorage.current + ".mp4";
+      document.getElementById("video_title").innerHTML = sessionStorage.currentTitle;
+    }
+    function changeVideoLeft(){
+      if (!sessionStorage.current) {
+        sessionStorage.current = 1;
+        sessionStorage.currentTitle = 1;
+      }
+
+      if (sessionStorage.current == 1) {
+        sessionStorage.current = 11;
+      } else {
+        sessionStorage.current = Number(sessionStorage.current) - 1;
+      }
+
+      if (sessionStorage.current == 9) {
+        sessionStorage.currentTitle = "Перевод 1";
+      } else if (sessionStorage.current == 10){
+        sessionStorage.currentTitle = "Перевод 2";
+      } else if (sessionStorage.current == 11){
+        sessionStorage.currentTitle = "Перевод 3";
+      } else {
+      sessionStorage.currentTitle = sessionStorage.current;
+      }
+
+      document.getElementById("video").src = "static/" + sessionStorage.current + ".mp4";
+      document.getElementById("video_title").innerHTML = sessionStorage.currentTitle;
+    }
+
+  </script>
+</body>
+</html>
